@@ -44,7 +44,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://localdev-deploy/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://arton-deploy-s3/$PROJECT_NAME/$GITHUB_SHA.zip
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name localdev-deploy --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name localdev-ci --s3-location bucket=localdev-deploy,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name Arton-Deploy --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name s3-arton-deploy --s3-location bucket=arton-deploy-s3,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
