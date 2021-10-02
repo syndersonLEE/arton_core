@@ -14,9 +14,9 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/test")
     public ResponseEntity testMethod() {
-        return ResponseEntity.ok(authService.testMethod());
+        return ResponseEntity.ok("test");
     }
 
 }
