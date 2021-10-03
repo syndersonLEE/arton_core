@@ -16,7 +16,7 @@ public class AuthController {
 
     @GetMapping("/test")
     public ResponseEntity testMethod() {
-        return ResponseEntity.ok("test");
+        return ResponseEntity.ok(authService.testMethod());
     }
 
 }
