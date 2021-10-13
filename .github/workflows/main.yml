@@ -9,7 +9,7 @@ on:
 name: Deploy Spring Boot to Amazon EC2
 
 env:
-  PROJECT_NAME: artoncore
+  PROJECT_NAME: arton_core
 
 jobs:
   deploy:
