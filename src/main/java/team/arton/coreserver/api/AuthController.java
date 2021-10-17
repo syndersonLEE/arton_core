@@ -19,4 +19,13 @@ public class AuthController {
         return ResponseEntity.ok(authService.testMethod());
     }
 
+    @GetMapping("/test2")
+    public ResponseEntity testMethod2() {
+        return ResponseEntity.ok("test");
+    }
+
+    @GetMapping("/testing")
+    public ResponseEntity testMethod3() {
+        return ResponseEntity.ok("test3");
+    }
 }
