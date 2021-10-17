@@ -24,4 +24,8 @@ public class AuthController {
         return ResponseEntity.ok("test");
     }
 
+    @GetMapping("/testing")
+    public ResponseEntity testMethod3() {
+        return ResponseEntity.ok("test3");
+    }
 }
