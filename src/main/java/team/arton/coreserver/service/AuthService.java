@@ -14,4 +14,5 @@ public class AuthService {
     public String testMethod() {
         return authRepository.findById(1L).get().getEmail();
     }
+
 }
