@@ -32,7 +32,10 @@ public class AuthController {
     }
 
     @GetMapping("/test2")
-    public ResponseEntity testMethod2() {
+    public ResponseEntity testMethod2() throws UnsupportedEncodingException {
+        String token = JwtParser.createToken(1L);
+        Map<String, Object> claims = JwtParser.verifyToken(token);
+        System.out.println(claims);
         return ResponseEntity.ok("test");
     }
 
