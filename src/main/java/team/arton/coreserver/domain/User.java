@@ -1,30 +1,27 @@
 package team.arton.coreserver.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
-@Table
-@Getter
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     private String type;
 
     @Column
-    private String email;
+    private String serverid;
 
     @Column
-    private String token;
+    private String nickname;
 
-    @Column
-    private String create_time;
 }
