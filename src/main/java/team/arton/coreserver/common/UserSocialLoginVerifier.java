@@ -1,8 +1,7 @@
 package team.arton.coreserver.common;
 
-import team.arton.coreserver.model.LoginDto;
-import team.arton.coreserver.model.LoginResponseDto;
+import team.arton.coreserver.model.UserResDto;
 
 public interface UserSocialLoginVerifier {
-    LoginResponseDto apiRequest(String authToken);
+    UserResDto apiRequest(String authToken);
 }

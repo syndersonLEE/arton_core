@@ -1,8 +1,10 @@
 package team.arton.coreserver.domain;
 
 import lombok.*;
+import team.arton.coreserver.exception.DuplicateException;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Entity
@@ -23,5 +25,6 @@ public class User {
 
     @Column
     private String nickname;
+
 
 }

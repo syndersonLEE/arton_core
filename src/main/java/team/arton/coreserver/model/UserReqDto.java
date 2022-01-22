@@ -6,7 +6,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class LoginDto {
+public class UserReqDto {
     @NotNull
     private SocialType type;
 
