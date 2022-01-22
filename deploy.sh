@@ -1,7 +1,7 @@
 REPOSITORY=/opt/myapp
 cd $REPOSITORY
 
-APP_NAME=arton_core
+APP_NAME=coreserver
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep '.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
