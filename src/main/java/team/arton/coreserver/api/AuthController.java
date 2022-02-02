@@ -43,7 +43,7 @@ public class AuthController {
     public DefaultResponse userSignup(@Valid @RequestBody final UserReqDto userReqDto) {
         User user = authService.saveUser(userReqDto);
         if(user == null) {
-            return DefaultResponse.res(StatusType.BADREQUEST, new UserResDto(user, false));
+            return DefaultResponse.res(StatusType.CONFLICT);
         }
         return DefaultResponse.res(StatusType.OK, new UserResDto(user, true));
     }
