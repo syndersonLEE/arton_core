@@ -4,6 +4,7 @@ os: linux
 files:
   - source: /
     destination: /opt/myapp
+    overwrite: yes
 permissions:
   - object: /opt/myapp/
     pattern: "**"
