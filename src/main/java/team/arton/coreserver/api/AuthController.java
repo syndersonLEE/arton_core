@@ -39,7 +39,7 @@ public class AuthController {
     }
 
     @ApiOperation("회원가입 요청")
-    @PostMapping("api/v1/signup")
+    @PostMapping("/api/v1/signup")
     public DefaultResponse userSignup(@Valid @RequestBody final UserReqDto userReqDto) {
         User user = authService.saveUser(userReqDto);
         if(user == null) {
