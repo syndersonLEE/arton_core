@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 import team.arton.coreserver.domain.User;
-import team.arton.coreserver.model.SocialType;
-import team.arton.coreserver.model.UserReqDto;
-import team.arton.coreserver.model.UserResDto;
+import team.arton.coreserver.model.*;
 import team.arton.coreserver.repository.AuthRepository;
 import team.arton.coreserver.service.AuthService;
 import utils.JwtParser;
@@ -32,16 +30,22 @@ public class AuthController {
 
     @ApiOperation("로그인 요청")
     @PostMapping("/api/v1/login")
-    public ResponseEntity userVerify(@Valid @RequestBody final UserReqDto userReqDto) {
-        User user = authService.findUser(userReqDto);
-        return ResponseEntity.ok(new UserResDto(user, false));
+    public DefaultResponse userVerify(@Valid @RequestBody final UserReqDto userReqDto) {
+        Optional<User> user = authService.findUser(userReqDto);
+        if(user.isPresent()) {
+            return DefaultResponse.res(StatusType.OK, new UserResDto(user.get(), false));
+        }
+        return DefaultResponse.res(StatusType.NOCONTENT);
     }
 
     @ApiOperation("회원가입 요청")
     @PostMapping("api/v1/signup")
-    public ResponseEntity userSignup(@Valid @RequestBody final UserReqDto userReqDto) {
+    public DefaultResponse userSignup(@Valid @RequestBody final UserReqDto userReqDto) {
         User user = authService.saveUser(userReqDto);
-        return ResponseEntity.status(201).body(new UserResDto(user, true));
+        if(user == null) {
+            return DefaultResponse.res(StatusType.BADREQUEST, new UserResDto(user, false));
+        }
+        return DefaultResponse.res(StatusType.OK, new UserResDto(user, true));
     }
 
     @ApiIgnore
