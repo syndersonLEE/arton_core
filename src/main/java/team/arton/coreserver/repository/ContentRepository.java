@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ContentRepository extends JpaRepository<Content, Long> {
-    List<Content> findByIdLessThanOrderByIdDesc(Pageable pageable, Long Id);
+    List<Content> findByIdLessThan(Pageable pageable, Long Id);
 }
 

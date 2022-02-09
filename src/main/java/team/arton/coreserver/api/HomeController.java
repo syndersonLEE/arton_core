@@ -23,10 +23,10 @@ public class HomeController {
 
     @ApiOperation("홈 화면 조회")
     @GetMapping("/api/v1/home")
-    public DefaultResponse getHome(@RequestParam Long lastContentId,
-                                   @RequestParam int pageNumber) {
-        log.info("진입점");
-        List<ContentResDto> contentResDtoList = contentService.infiniteContentView(lastContentId, pageNumber);
+    public DefaultResponse getHome(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
+                                   @RequestParam int contentNum) {
+        log.info(lastContentId.toString());
+        List<ContentResDto> contentResDtoList = contentService.infiniteContentView(lastContentId, contentNum);
         return DefaultResponse.res(StatusType.OK, contentResDtoList);
     }
 }

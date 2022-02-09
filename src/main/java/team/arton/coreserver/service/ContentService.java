@@ -9,6 +9,8 @@ import team.arton.coreserver.model.ContentResDto;
 import team.arton.coreserver.repository.ContentRepository;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Service
 @Slf4j
@@ -32,7 +34,8 @@ public class ContentService {
 
     @Transactional
     public List<ContentResDto> infiniteContentView(Long lastContentId, int pageSize) {
-        PageRequest pageRequest = PageRequest.of(0, pageSize);
-        return contentRepository.findByIdLessThanOrderByIdDesc(pageRequest, lastContentId).stream().map(ContentResDto::new).toList();
+        PageRequest pageRequest = PageRequest.of(0, pageSize, Sort.by("id").descending());
+        if(lastContentId == 0) return contentRepository.findAll(pageRequest).getContent().stream().map(ContentResDto::new).toList();
+        return contentRepository.findByIdLessThan(pageRequest, lastContentId).stream().map(ContentResDto::new).toList();
     }
 }
