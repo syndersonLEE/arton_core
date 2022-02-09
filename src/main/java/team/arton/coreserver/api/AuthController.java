@@ -21,12 +21,14 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@AllArgsConstructor
 @Slf4j
 public class AuthController {
 
     private AuthService authService;
-    private AuthRepository authRepository;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @ApiOperation("로그인 요청")
     @PostMapping("/api/v1/login")
@@ -55,11 +57,5 @@ public class AuthController {
         Map<String, Object> claims = JwtParser.verifyToken(token);
         System.out.println(claims);
         return ResponseEntity.ok(claims);
-    }
-
-    @ApiIgnore
-    @GetMapping("/testing")
-    public ResponseEntity testMethod3() {
-        return ResponseEntity.ok("test3");
     }
 }
