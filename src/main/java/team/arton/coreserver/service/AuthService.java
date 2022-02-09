@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.arton.coreserver.domain.User;
-import team.arton.coreserver.exception.DuplicateException;
 import team.arton.coreserver.exception.InvalidValueException;
-import team.arton.coreserver.exception.NotFoundException;
 import team.arton.coreserver.model.UserReqDto;
 import team.arton.coreserver.repository.AuthRepository;
 
@@ -16,9 +14,12 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-@AllArgsConstructor
 public class AuthService {
     private AuthRepository authRepository;
+
+    public AuthService(AuthRepository authRepository) {
+        this.authRepository = authRepository;
+    }
 
     public Optional<User> findUser(final UserReqDto userReqDto){
         try {
