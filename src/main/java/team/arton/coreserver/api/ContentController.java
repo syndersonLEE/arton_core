@@ -1,8 +1,6 @@
 package team.arton.coreserver.api;
 
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.arton.coreserver.model.ContentResDto;
@@ -13,53 +11,22 @@ import team.arton.coreserver.service.ContentService;
 import java.util.List;
 
 @RestController
-@Slf4j
-public class HomeController {
+public class ContentController {
+
     private ContentService contentService;
 
-    public HomeController(ContentService contentService) {
+    public ContentController(ContentService contentService) {
         this.contentService = contentService;
     }
 
-    @ApiOperation("홈 화면 조회")
-    @GetMapping("/api/v1/home")
-    public DefaultResponse getHome(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
-                                   @RequestParam(required = false, defaultValue = "6") int contentNum) {
-        log.info(lastContentId.toString());
+    public DefaultResponse getNewContentList(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
+                                             @RequestParam(required = false, defaultValue = "6") int contentNum) {
         List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(lastContentId, contentNum);
         return DefaultResponse.res(StatusType.OK, contentResDtoList);
     }
+
+    public DefaultResponse getWatchedContentList(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
+                                                 @RequestParam(required = false, defaultValue = "6") int contentNum) {
+        return DefaultResponse.res(StatusType.OK);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

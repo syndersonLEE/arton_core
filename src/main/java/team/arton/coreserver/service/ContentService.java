@@ -32,9 +32,11 @@ public class ContentService {
     }
 
     @Transactional
-    public List<ContentResDto> infiniteContentView(Long lastContentId, int pageSize) {
+    public List<ContentResDto> infiniteNewContentView(Long lastContentId, int pageSize) {
         PageRequest pageRequest = PageRequest.of(0, pageSize, Sort.by("id").descending());
         if(lastContentId == 0) return contentRepository.findAll(pageRequest).getContent().stream().map(ContentResDto::new).collect(Collectors.toList());
         return contentRepository.findByIdLessThan(pageRequest, lastContentId).stream().map(ContentResDto::new).collect(Collectors.toList());
     }
+
+
 }
