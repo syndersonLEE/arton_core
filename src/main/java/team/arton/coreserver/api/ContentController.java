@@ -1,6 +1,7 @@
 package team.arton.coreserver.api;
 
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.arton.coreserver.model.ContentResDto;
@@ -19,6 +20,7 @@ public class ContentController {
         this.contentService = contentService;
     }
 
+    @GetMapping
     public DefaultResponse getNewContentList(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
                                              @RequestParam(required = false, defaultValue = "6") int contentNum) {
         List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(lastContentId, contentNum);
@@ -28,5 +30,6 @@ public class ContentController {
     public DefaultResponse getWatchedContentList(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
                                                  @RequestParam(required = false, defaultValue = "6") int contentNum) {
         return DefaultResponse.res(StatusType.OK);
+
     }
 }

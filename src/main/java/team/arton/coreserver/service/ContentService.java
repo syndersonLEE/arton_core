@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import team.arton.coreserver.model.ContentResDto;
 import team.arton.coreserver.repository.ContentRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,21 +22,23 @@ public class ContentService {
         this.contentRepository = contentRepository;
     }
 
-    public List<ContentResDto> getContentList() {
-        return fetchContent(0, 3);
-    }
-
-    @Transactional
-    public List<ContentResDto> fetchContent(int pageNum, int pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNum,pageSize, Sort.by("id").descending());
-        return contentRepository.findAll(pageRequest).stream().map(ContentResDto::new).toList();
-    }
-
     @Transactional
     public List<ContentResDto> infiniteNewContentView(Long lastContentId, int pageSize) {
         PageRequest pageRequest = PageRequest.of(0, pageSize, Sort.by("id").descending());
-        if(lastContentId == 0) return contentRepository.findAll(pageRequest).getContent().stream().map(ContentResDto::new).collect(Collectors.toList());
-        return contentRepository.findByIdLessThan(pageRequest, lastContentId).stream().map(ContentResDto::new).collect(Collectors.toList());
+        List<ContentResDto> contentList;
+
+        if(lastContentId == 0) {
+            contentList = contentRepository.findAll(pageRequest).getContent().stream().map(ContentResDto::new).collect(Collectors.toList());
+        } else {
+            contentList = contentRepository.findByIdLessThan(pageRequest, lastContentId).stream().map(ContentResDto::new).collect(Collectors.toList());
+        }
+
+        contentList.stream().map(content -> {
+            content.setBookmark(true);
+            return content;
+        }).collect(Collectors.toList());
+
+        return contentList;
     }
 
 
