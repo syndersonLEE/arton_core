@@ -2,12 +2,11 @@ package team.arton.coreserver.api;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import team.arton.coreserver.model.ContentResDto;
-import team.arton.coreserver.model.DefaultResponse;
-import team.arton.coreserver.model.StatusType;
+import org.springframework.web.bind.annotation.*;
+import team.arton.coreserver.common.auth.Auth;
+import team.arton.coreserver.common.auth.AuthContext;
+import team.arton.coreserver.domain.Bookmark;
+import team.arton.coreserver.model.*;
 import team.arton.coreserver.service.ContentService;
 
 import java.util.List;
@@ -23,12 +22,33 @@ public class HomeController {
 
     @ApiOperation("홈 화면 조회")
     @GetMapping("/api/v1/home")
-    public DefaultResponse getHome(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
-                                   @RequestParam(required = false, defaultValue = "6") int contentNum) {
-        log.info(lastContentId.toString());
-        List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(lastContentId, contentNum);
+    @Auth
+    public DefaultResponse getHome(@RequestBody final HomeReqDto homeReqDto) {
+        Long userId = AuthContext.getUserId();
+        log.info("{} - getContentNum",  homeReqDto.getContentNum());
+        List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(homeReqDto.getLastContentId(), homeReqDto.getContentNum(), userId);
         return DefaultResponse.res(StatusType.OK, contentResDtoList);
     }
+
+    @ApiOperation("북마크 켜기")
+    @PostMapping("/api/v1/bookmark")
+    @Auth
+    public DefaultResponse enrollBookmark(@RequestBody final BookmarkReq bookmarkReq) {
+        Long userId = AuthContext.getUserId();
+        contentService.enrollContentBookmark(userId, bookmarkReq.getContentId());
+        return DefaultResponse.res(StatusType.CREATED, bookmarkReq);
+    }
+
+    @ApiOperation("북마크 끄기")
+    @DeleteMapping("/api/v1/bookmark")
+    @Auth
+    public DefaultResponse deleteBookmark(@RequestBody final BookmarkReq bookmarkReq) {
+        Long userId = AuthContext.getUserId();
+        contentService.deleteContentBookmark(userId, bookmarkReq.getContentId());
+        return DefaultResponse.res(StatusType.OK, bookmarkReq);
+    }
+
+
 }
 
 

@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Setter
 @Getter
 public class Bookmark {
 
@@ -21,4 +20,9 @@ public class Bookmark {
     private Long contentId;
 
     public Bookmark() {}
+
+    public Bookmark(Long userId, Long contentId) {
+        this.userId = userId;
+        this.contentId = contentId;
+    }
 }
