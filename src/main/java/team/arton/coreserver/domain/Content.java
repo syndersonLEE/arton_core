@@ -21,4 +21,5 @@ public class Content {
 
     @Column(name = "thumbnail_url")
     private String thumbnailUrl;
+
 }

@@ -4,7 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team.arton.coreserver.domain.User;
-import utils.JwtParser;
+import team.arton.coreserver.service.JwtService;
 
 @Getter
 @AllArgsConstructor
@@ -22,11 +22,10 @@ public class UserResDto {
     @NotNull
     private boolean isNewUser;
 
-    public UserResDto(User user, boolean isNewUser) {
+    public UserResDto(User user, String token, boolean isNewUser) {
         this.type = SocialType.valueOf(user.getType().toUpperCase());
-        this.accessToken = JwtParser.createToken(user.getId());
+        this.accessToken = token;
         this.nickname = user.getNickname();
         this.isNewUser = isNewUser;
     }
-
 }
