@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import team.arton.coreserver.exception.NotFoundException;
+import team.arton.coreserver.exception.UnAuthorizedException;
 import team.arton.coreserver.model.DefaultResponse;
 import team.arton.coreserver.model.StatusType;
 
@@ -23,5 +24,11 @@ public class ExceptionAdvice {
     public DefaultResponse notFoundType(NotFoundException e) {
         logger.error(e.getMessage());
         return DefaultResponse.res(StatusType.BADREQUEST);
+    }
+
+    @ExceptionHandler(UnAuthorizedException.class)
+    public DefaultResponse unAuthorizedType(UnAuthorizedException e) {
+        logger.error(e.getMessage());
+        return DefaultResponse.res(StatusType.UNAUTHORIZED);
     }
 }
