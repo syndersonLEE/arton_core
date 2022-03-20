@@ -21,7 +21,7 @@ public class HomeController {
     }
 
     @ApiOperation("홈 화면 조회")
-    @GetMapping("/api/v1/home")
+    @PostMapping("/api/v1/home")
     @Auth
     public DefaultResponse getHome(@RequestBody final HomeReqDto homeReqDto) {
         Long userId = AuthContext.getUserId();
@@ -47,7 +47,6 @@ public class HomeController {
         contentService.deleteContentBookmark(userId, bookmarkReq.getContentId());
         return DefaultResponse.res(StatusType.OK, bookmarkReq);
     }
-
 
 }
 
