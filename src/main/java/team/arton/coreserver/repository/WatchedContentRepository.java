@@ -4,14 +4,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import team.arton.coreserver.domain.Content;
+import team.arton.coreserver.domain.User;
+import team.arton.coreserver.domain.WatchedContent;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface ContentRepository extends JpaRepository<Content, Long> {
-    Optional<Content> findById(Long id);
-    List<Content> findByIdLessThan(Pageable pageable, Long Id);
+public interface WatchedContentRepository extends JpaRepository<WatchedContent, Long> {
+    List<WatchedContent> findDistinctByUser(Pageable pageable, User user);
 }
-
-

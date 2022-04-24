@@ -59,15 +59,6 @@ public class AuthController {
     }
 
     @ApiIgnore
-    @GetMapping("/test2")
-    public ResponseEntity testMethod2() {
-        String token = jwtService.createToken(1L);
-        Map<String, Object> claims = jwtService.verifyToken(token);
-        System.out.println(claims);
-        return ResponseEntity.ok(claims);
-    }
-
-    @ApiIgnore
     @GetMapping("/authtest")
     @Auth
     public DefaultResponse testMethod3() {
