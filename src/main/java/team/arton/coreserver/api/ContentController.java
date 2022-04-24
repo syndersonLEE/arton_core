@@ -2,14 +2,10 @@ package team.arton.coreserver.api;
 
 
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.arton.coreserver.common.auth.Auth;
 import team.arton.coreserver.common.auth.AuthContext;
-import team.arton.coreserver.model.ContentResDto;
-import team.arton.coreserver.model.DefaultResponse;
-import team.arton.coreserver.model.StatusType;
+import team.arton.coreserver.model.*;
 import team.arton.coreserver.service.ContentService;
 
 import java.util.List;
@@ -24,19 +20,30 @@ public class ContentController {
     }
 
     @ApiOperation("New Content")
-    @GetMapping("/api/v1/newcontent")
+    @PostMapping("/api/v1/newcontent")
     @Auth
-    public DefaultResponse getNewContentList(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
-                                             @RequestParam(required = false, defaultValue = "6") int contentNum) {
+    public DefaultResponse getNewContentList(@RequestBody HomeReqDto homeReqDto) {
         Long userId = AuthContext.getUserId();
-        List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(lastContentId, contentNum, userId);
+        List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(homeReqDto.getLastContentId(), homeReqDto.getContentNum(), userId);
         return DefaultResponse.res(StatusType.OK, contentResDtoList);
     }
 
+    @ApiOperation("Watched Content")
+    @PostMapping("/api/v1/watchedcontent")
+    @Auth
+    public DefaultResponse getWatchedContentList(@RequestBody HomeReqDto homeReqDto) {
+        Long userId = AuthContext.getUserId();
+        List<ContentResDto> contentResDtoList = contentService.infiniteRecentContentView(homeReqDto.getLastContentId(), homeReqDto.getContentNum(), userId);
+        return DefaultResponse.res(StatusType.OK, contentResDtoList);
+    }
 
-    public DefaultResponse getWatchedContentList(@RequestParam(required = false, defaultValue = "0") Long lastContentId,
-                                                 @RequestParam(required = false, defaultValue = "6") int contentNum) {
+    @ApiOperation("Add View")
+    @PostMapping("/api/v1/viewcontent")
+    @Auth
+    public DefaultResponse postViewAdd(@RequestBody final ContentViewDto contentViewDto) {
+        Long userId = AuthContext.getUserId();
+        contentService.addContentViewCount(userId, contentViewDto.getContentId());
+
         return DefaultResponse.res(StatusType.OK);
-
     }
 }
