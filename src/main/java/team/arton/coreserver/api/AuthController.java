@@ -2,7 +2,6 @@ package team.arton.coreserver.api;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
@@ -10,13 +9,14 @@ import team.arton.coreserver.common.auth.Auth;
 import team.arton.coreserver.common.auth.AuthContext;
 import team.arton.coreserver.domain.User;
 import team.arton.coreserver.model.*;
+import team.arton.coreserver.model.resdto.UserReqDto;
+import team.arton.coreserver.model.resdto.UserResDto;
 import team.arton.coreserver.service.AuthService;
 import team.arton.coreserver.service.JwtService;
 import team.arton.coreserver.service.S3FileUploadService;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController

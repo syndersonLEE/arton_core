@@ -7,7 +7,7 @@ import team.arton.coreserver.common.auth.Auth;
 import team.arton.coreserver.common.auth.AuthContext;
 import team.arton.coreserver.domain.User;
 import team.arton.coreserver.exception.UnAuthorizedException;
-import team.arton.coreserver.model.AdminContentReqDto;
+import team.arton.coreserver.model.resdto.AdminContentReqDto;
 import team.arton.coreserver.model.DefaultResponse;
 import team.arton.coreserver.model.StatusType;
 import team.arton.coreserver.service.ContentService;
