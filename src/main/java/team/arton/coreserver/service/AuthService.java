@@ -1,12 +1,11 @@
 package team.arton.coreserver.service;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.arton.coreserver.domain.User;
 import team.arton.coreserver.exception.InvalidValueException;
-import team.arton.coreserver.model.UserReqDto;
+import team.arton.coreserver.model.resdto.UserReqDto;
 import team.arton.coreserver.repository.AuthRepository;
 
 

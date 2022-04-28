@@ -14,6 +14,7 @@ public class DefaultResponse {
         this.data = data;
     }
 
+
     public DefaultResponse(final int status, final String message) {
         this(status, message, null);
     }

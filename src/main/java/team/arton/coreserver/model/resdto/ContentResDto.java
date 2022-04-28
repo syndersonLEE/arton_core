@@ -1,4 +1,4 @@
-package team.arton.coreserver.model;
+package team.arton.coreserver.model.resdto;
 
 import lombok.Getter;
 import team.arton.coreserver.domain.Content;
@@ -18,6 +18,7 @@ public class ContentResDto {
     private String thumbnailImage;
 
     private boolean bookmark;
+
 
     public ContentResDto(Content content) {
         this.contentId = content.getId();

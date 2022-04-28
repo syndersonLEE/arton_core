@@ -1,9 +1,10 @@
-package team.arton.coreserver.model;
+package team.arton.coreserver.model.resdto;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import team.arton.coreserver.domain.User;
+import team.arton.coreserver.model.SocialType;
 import team.arton.coreserver.service.JwtService;
 
 @Getter
