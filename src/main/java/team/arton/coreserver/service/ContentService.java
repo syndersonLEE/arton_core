@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.arton.coreserver.domain.*;
 import team.arton.coreserver.exception.NotFoundException;
-import team.arton.coreserver.model.AdminContentReqDto;
-import team.arton.coreserver.model.ContentResDto;
-import team.arton.coreserver.model.QuizReqDto;
+import team.arton.coreserver.model.resdto.AdminContentReqDto;
+import team.arton.coreserver.model.resdto.ContentResDto;
+import team.arton.coreserver.model.resdto.QuizReqDto;
 import team.arton.coreserver.repository.*;
 
 import java.util.List;

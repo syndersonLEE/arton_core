@@ -1,8 +1,9 @@
-package team.arton.coreserver.model;
+package team.arton.coreserver.model.resdto;
 
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.ToString;
+import team.arton.coreserver.model.SocialType;
 
 @Getter
 @ToString

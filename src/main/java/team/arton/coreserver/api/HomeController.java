@@ -5,8 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import team.arton.coreserver.common.auth.Auth;
 import team.arton.coreserver.common.auth.AuthContext;
-import team.arton.coreserver.domain.Bookmark;
 import team.arton.coreserver.model.*;
+import team.arton.coreserver.model.resdto.ContentResDto;
+import team.arton.coreserver.model.resdto.HomeReqDto;
 import team.arton.coreserver.service.ContentService;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class HomeController {
         Long userId = AuthContext.getUserId();
         log.info("{} - getContentNum",  homeReqDto.getContentNum());
         List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(homeReqDto.getLastContentId(), homeReqDto.getContentNum(), userId);
-        return DefaultResponse.res(StatusType.OK, contentResDtoList);
+        return DefaultResponse.res(StatusType.OK, new LastCheckModel(contentResDtoList, contentResDtoList.size() <= homeReqDto.getContentNum()));
     }
 
     @ApiOperation("북마크 켜기")
