@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public class LastCheckModel {
-    private Object data;
+    private Object content;
     private boolean checkLast;
 
-    public LastCheckModel(Object data, boolean checkLast) {
-        this.data = data;
+    public LastCheckModel(Object content, boolean checkLast) {
+        this.content = content;
         this.checkLast = checkLast;
     }
 }
