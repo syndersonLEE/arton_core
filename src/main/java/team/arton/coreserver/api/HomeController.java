@@ -28,7 +28,8 @@ public class HomeController {
         Long userId = AuthContext.getUserId();
         log.info("{} - getContentNum",  homeReqDto.getContentNum());
         List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(homeReqDto.getLastContentId(), homeReqDto.getContentNum(), userId);
-        return DefaultResponse.res(StatusType.OK, new LastCheckModel(contentResDtoList, contentResDtoList.size() <= homeReqDto.getContentNum()));
+        log.info("{} - contentResDtoList.size(), {} - homeReqDto.getContentNum()", contentResDtoList.size(), homeReqDto.getContentNum());
+        return DefaultResponse.res(StatusType.OK, new LastCheckModel(contentResDtoList, contentResDtoList.size() >= homeReqDto.getContentNum()));
     }
 
     @ApiOperation("북마크 켜기")

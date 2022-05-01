@@ -2,6 +2,7 @@ package team.arton.coreserver.api;
 
 
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 import team.arton.coreserver.common.auth.Auth;
 import team.arton.coreserver.common.auth.AuthContext;
@@ -27,7 +28,7 @@ public class ContentController {
     public DefaultResponse getNewContentList(@RequestBody HomeReqDto homeReqDto) {
         Long userId = AuthContext.getUserId();
         List<ContentResDto> contentResDtoList = contentService.infiniteNewContentView(homeReqDto.getLastContentId(), homeReqDto.getContentNum(), userId);
-        return DefaultResponse.res(StatusType.OK, new LastCheckModel(contentResDtoList, contentResDtoList.size() <= homeReqDto.getContentNum()));
+        return DefaultResponse.res(StatusType.OK, new LastCheckModel(contentResDtoList, contentResDtoList.size() >= homeReqDto.getContentNum()));
     }
 
     @ApiOperation("Watched Content")
@@ -36,7 +37,7 @@ public class ContentController {
     public DefaultResponse getWatchedContentList(@RequestBody HomeReqDto homeReqDto) {
         Long userId = AuthContext.getUserId();
         List<ContentResDto> contentResDtoList = contentService.infiniteRecentContentView(homeReqDto.getLastContentId(), homeReqDto.getContentNum(), userId);
-        return DefaultResponse.res(StatusType.OK, new LastCheckModel(contentResDtoList, contentResDtoList.size() <= homeReqDto.getContentNum()));
+        return DefaultResponse.res(StatusType.OK, new LastCheckModel(contentResDtoList, contentResDtoList.size() >= homeReqDto.getContentNum()));
     }
 
     @ApiOperation("Add View")
