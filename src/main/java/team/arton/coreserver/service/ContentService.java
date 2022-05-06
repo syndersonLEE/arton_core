@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.arton.coreserver.domain.*;
 import team.arton.coreserver.exception.NotFoundException;
-import team.arton.coreserver.model.resdto.AdminContentReqDto;
+import team.arton.coreserver.model.reqdto.AdminContentReqDto;
+import team.arton.coreserver.model.reqdto.ContentViewReqDto;
 import team.arton.coreserver.model.resdto.ContentResDto;
-import team.arton.coreserver.model.resdto.QuizReqDto;
+import team.arton.coreserver.model.reqdto.QuizReqDto;
 import team.arton.coreserver.repository.*;
 
 import java.util.List;
@@ -72,6 +73,24 @@ public class ContentService {
         return contentList;
     }
 
+    public List<ContentResDto>  infiniteBookmarkContentView(Long lastContentId, int pageSize, Long userId) {
+        PageRequest pageRequest = PageRequest.of(0, pageSize, Sort.by("id").descending());
+        List<ContentResDto> contentList;
+
+        contentList = bookmarkRepository.findBookmarksByUserId(pageRequest, userId).stream().map(bookmark -> {
+            Content bookmarkOnContent = contentRepository.findById(bookmark.getContentId()).get();
+            return new ContentResDto(bookmarkOnContent);
+        }).collect(Collectors.toList());
+
+        // bookmark set 부분
+        contentList.stream().map(content -> {
+            content.setBookmark(true);
+            return content;
+        }).collect(Collectors.toList());
+
+        return contentList;
+    }
+
     @Transactional
     public Content enrollAdminContent(AdminContentReqDto adminContentReqDto) {
         Editor editor = editorRepository.findById(adminContentReqDto.getAuthorId()).orElseThrow(() -> new NotFoundException("No Author"));
@@ -88,6 +107,13 @@ public class ContentService {
                 .build();
 
         return contentRepository.save(content);
+    }
+
+    @Transactional
+    public Content deleteAdminContent(ContentViewReqDto contentViewReqDto) {
+        Content deletedContent = contentRepository.findById(contentViewReqDto.getContentId()).orElseThrow(() -> new NotFoundException("No Content"));
+        contentRepository.deleteById(contentViewReqDto.getContentId());
+        return deletedContent;
     }
 
     @Transactional
