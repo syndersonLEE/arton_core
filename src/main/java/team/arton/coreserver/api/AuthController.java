@@ -9,7 +9,7 @@ import team.arton.coreserver.common.auth.Auth;
 import team.arton.coreserver.common.auth.AuthContext;
 import team.arton.coreserver.domain.User;
 import team.arton.coreserver.model.*;
-import team.arton.coreserver.model.resdto.UserReqDto;
+import team.arton.coreserver.model.reqdto.UserReqDto;
 import team.arton.coreserver.model.resdto.UserResDto;
 import team.arton.coreserver.service.AuthService;
 import team.arton.coreserver.service.JwtService;

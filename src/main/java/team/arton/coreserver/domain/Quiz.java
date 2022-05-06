@@ -2,7 +2,7 @@ package team.arton.coreserver.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import team.arton.coreserver.model.resdto.QuizReqDto;
+import team.arton.coreserver.model.reqdto.QuizReqDto;
 
 import javax.persistence.*;
 

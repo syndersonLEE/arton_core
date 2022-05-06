@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.arton.coreserver.domain.User;
 import team.arton.coreserver.exception.InvalidValueException;
-import team.arton.coreserver.model.resdto.UserReqDto;
+import team.arton.coreserver.model.reqdto.UserReqDto;
 import team.arton.coreserver.repository.AuthRepository;
 
 

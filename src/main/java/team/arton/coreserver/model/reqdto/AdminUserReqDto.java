@@ -1,4 +1,4 @@
-package team.arton.coreserver.model.resdto;
+package team.arton.coreserver.model.reqdto;
 
 public class AdminUserReqDto {
     private String serverId;

@@ -1,10 +1,10 @@
-package team.arton.coreserver.model;
+package team.arton.coreserver.model.reqdto;
 
 import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
-public class ContentViewDto {
+public class ContentViewReqDto {
     @NonNull
     private Long contentId;
 }
