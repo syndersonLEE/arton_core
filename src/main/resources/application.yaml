@@ -16,19 +16,19 @@ server:
 
 JWT:
   ISSUER: TEST
-  SECRET: H6J8GH4K9MJ7
+  SECRET: *
 
 
 cloud:
   aws:
     credentials:
-        accessKey: AKIA4XTKVXFC4B4ZOG2X
-        secretKey: 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
+        accessKey: *
+        secretKey: *
     stack:
       auto: false
     s3:
       bucket:
-        name: arton-images-s3
-        url: https://s3.ap-northeast-2.amazonaws.com/arton-images-s3/
+        name: *
+        url: *
     region:
       static: ap-northeast-2
